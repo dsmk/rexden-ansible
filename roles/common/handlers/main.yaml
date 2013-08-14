@@ -1,0 +1,9 @@
+---
+  - name: restart rsyslog
+    action: service name=rsyslog state=restarted
+
+  - name: restart sshd
+    action: service name=sshd state=restarted
+
+  - name: iptables stop
+    action: service name=iptables state=stopped
