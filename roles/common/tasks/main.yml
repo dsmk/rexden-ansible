@@ -18,7 +18,7 @@
     
 # Debian/Ubuntu setup
   - name: update rsyslog config to forward to buckbeak
-    when: ansible_os_family == 'Debian'
+    when: ansible_os_family == 'Debian-skip'
     template: src="10-logserver.conf" dest="/etc/rsyslog.d/10-logserver.conf"
     notify:
       - restart debian rsyslog
