@@ -5,8 +5,8 @@
   - name: Add backup key to root authorized keys
     action: authorized_key user=root key="ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA0OV0QQ14Mqx591tICwRZglJsHGUP9w+H5D01jcUVH1jTMe3mybJDcyRO3Fotx74am+WeCNFi2FezTPM1CwUUHdAKAcJb+9kN3B7rSVTcmvs5GRQgLG7QZ2U5OkDN6WUmIWTEUAqccakYzn5R0h86E96nGsFG6GkzxWz1BucRRSx6Z/tsdB9kc9DHzcxKWoijhvoc+XLBdeXlgo1AgL9lk1awg8lOPf1QkMuZA412aDKarDewUj/gUZGpnB3DwA8AkwURxUFKW5e+PB1sxN9jJB/TVR5svsqzSqTt+jBliJPoVU4Bo59X7So4CL0JTBdi48PZavaiGoWTpUCmprx3Cw== fawkes-backupppc"
 
-    - name: Add management key to root authorized keys
-      action: authorized_key user=root key="ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAvmMJ2kK830HnGt9OUaSydR4cXuCyTsQFRnXxnnIxUTR+4vUQazTxcLOxsgf5wWkSNly1Q7MRkhuWJ8eFyZ4XbdS5GTTWHUoNvk0o7L8GAYlrKDSaTYFf40UWR17Aq0hPWzIT2pqPRKl3oPKTl6EED7sO7RAGhkpELODSoa84vEzQma9goJwdNEb8qF5Jh4xvCE4QFxTLfncDDDkhEI1iq4gNSbyGFsjuG4RoyMJN/yV2JVcTGMWY0JrKLx5/A2BVAZYr8NY7oM2TIbzeSG/vHhYiDA2e+JInTNehuC3PR/5YE5Y0aXqOYw5pacb5GSdyywOztSTkxp0Q1XRm2P1NuQ== root@hagrid.rexden.us"
+  - name: Add management key to root authorized keys
+    action: authorized_key user=root key="ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAvmMJ2kK830HnGt9OUaSydR4cXuCyTsQFRnXxnnIxUTR+4vUQazTxcLOxsgf5wWkSNly1Q7MRkhuWJ8eFyZ4XbdS5GTTWHUoNvk0o7L8GAYlrKDSaTYFf40UWR17Aq0hPWzIT2pqPRKl3oPKTl6EED7sO7RAGhkpELODSoa84vEzQma9goJwdNEb8qF5Jh4xvCE4QFxTLfncDDDkhEI1iq4gNSbyGFsjuG4RoyMJN/yV2JVcTGMWY0JrKLx5/A2BVAZYr8NY7oM2TIbzeSG/vHhYiDA2e+JInTNehuC3PR/5YE5Y0aXqOYw5pacb5GSdyywOztSTkxp0Q1XRm2P1NuQ== root@hagrid.rexden.us"
 
   - name: Ensure that bkupfile is the latest version
     copy: src="bkupfile" dest="/usr/bin/bkupfile" owner=root group=root mode=0555
