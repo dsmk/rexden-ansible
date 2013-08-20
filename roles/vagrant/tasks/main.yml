@@ -1,0 +1,23 @@
+---
+  - name: Add the virtualbox and vagrant packages (Ubuntu)
+    when: ansible_os_family == 'Debian'
+    apt: name="$item" state=present
+    with_items:
+      - vagrant
+      - virtualbox
+
+# RedHat setup
+#  - name: update rsyslog config to forward to buckbeak
+#    when: ansible_os_family == 'RedHat'
+#    template: src="10-logserver.conf" dest="/etc/rsyslog.d/10-logserver.conf"
+#    notify:
+#      - restart debian rsyslog
+
+#  - name: Ensure that Debian/Ubuntu base packages are installed
+#    when: ansible_os_family == 'RedHat'
+#    apt: name="$item" state=present
+#    with_items:
+#      - vim
+#      - git
+#      - csh
+
