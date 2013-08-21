@@ -8,9 +8,20 @@
     with_items:
       - virtualbox
 
-  - name: Add the vagrant package on the main web site (Ubuntu)
+  - name: Determine whether vagrant has been installed (Ubuntu)
     when: ansible_os_family == 'Debian'
-    shell: dpkg --status vagrant 2>/dev/null || dpkg -i {{ vagrant_debian_url }}
+    shell: dpkg --status vagrant 
+    register: vagrant_found
+
+  - name: Download vagrant package (Ubuntu)
+    when: ansible_os_family == 'Debian'
+    when: vagrant_found.rc > 0
+    get_url: dest=/var/tmp/virtualbox.deb url="{{ vagrant_debian_url }}"
+
+  - name: Add the vagrant package on the main web site (Ubuntu)
+    when: vagrant_found.rc > 0
+    when: ansible_os_family == 'Debian'
+    shell: dpkg -i /var/tmp/virtualbox.deb
 
   #- name: Remove vagrant package prior to doing the gem package (Ubuntu)
   #  when: ansible_os_family == 'Debian'
