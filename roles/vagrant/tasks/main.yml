@@ -6,28 +6,26 @@
     when: ansible_os_family == 'Debian'
     apt: name="$item" state=present
     with_items:
-      - vagrant
       - virtualbox
 
-  - name: Remove vagrant package prior to doing the gem package (Ubuntu)
+  - name: Add the vagrant package on the main web site (Ubuntu)
     when: ansible_os_family == 'Debian'
-    apt: name="vagrant" state=absent
+    shell: dpkg --status vagrant 2>/dev/null || dpkg -i {{ vagrant_debian_url }}
 
-  - name: Install Vagrant GEM package
-    gem: name="vagrant" state="present"
+  #- name: Remove vagrant package prior to doing the gem package (Ubuntu)
+  #  when: ansible_os_family == 'Debian'
+  #  apt: name="vagrant" state=absent
 
-# RedHat setup
-#  - name: update rsyslog config to forward to buckbeak
-#    when: ansible_os_family == 'RedHat'
-#    template: src="10-logserver.conf" dest="/etc/rsyslog.d/10-logserver.conf"
-#    notify:
-#      - restart debian rsyslog
+  #- name: Install Vagrant GEM package
+  #  gem: name="vagrant" state="present"
 
-#  - name: Ensure that Debian/Ubuntu base packages are installed
-#    when: ansible_os_family == 'RedHat'
-#    apt: name="$item" state=present
-#    with_items:
-#      - vim
-#      - git
-#      - csh
+# RedHat setup 
+  - name: Install the VirtualBox RPM if not already installed (RedHat)
+    when: ansible_os_family == 'RedHat'
+    shell: rpm -q VirtualBox || rpm -Uvh {{ vbox_redhat_url }}
+
+
+  - name: Install the Vagrant RPM (RedHat)
+    when: ansible_os_family == 'RedHat'
+    shell: rpm -q vagrant || rpm -Uvh {{ vagrant_redhat_url }}
 
