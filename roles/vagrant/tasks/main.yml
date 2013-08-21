@@ -14,7 +14,7 @@
     apt: name="vagrant" state=absent
 
   - name: Install Vagrant GEM package
-    gem: name="vagrant" version="1.1" state="present"
+    gem: name="vagrant" state="present"
 
 # RedHat setup
 #  - name: update rsyslog config to forward to buckbeak
