@@ -12,6 +12,7 @@
     when: ansible_os_family == 'Debian'
     shell: dpkg --status vagrant 
     register: vagrant_found
+    ignore_errors: true
 
   - name: Download vagrant package (Ubuntu)
     when: ansible_os_family == 'Debian'
