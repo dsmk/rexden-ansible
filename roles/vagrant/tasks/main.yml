@@ -1,6 +1,6 @@
 ---
   - name: Echo the path
-    shell: echo $PATH
+    shell: echo $PATH 1>&2
 
   - name: Add the virtualbox and vagrant packages (Ubuntu)
     when: ansible_os_family == 'Debian'
