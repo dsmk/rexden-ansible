@@ -1,4 +1,15 @@
 ---
-vagrant_debian_url: http://files.vagrantup.com/packages/7ec0ee1d00a916f80b109a298bab08e391945243/vagrant_1.2.7_x86_64.deb
-vagrant_redhat_url: http://download.virtualbox.org/virtualbox/4.2.16/VirtualBox-4.2-4.2.16_86992_el6-1.x86_64.rpm
+vbox_main_rel: 4.2
+vbox_version: "{{ vbox_main_rel }}.16"
+vbox_extpack_url: "http://download.virtualbox.org/virtualbox/{{ vbox_version }}/Oracle_VM_VirtualBox_Extension_Pack-{{ vbox_version }}.vbox-extpack"
+vbox_extpack_loc: "/var/lib/ansible/Oracle_VM_VirtualBox_Extension_Pack-{{ vbox_version }}.vbox-extpack"
+vbox_redhat_repo: "http://download.virtualbox.org/virtualbox/rpm/el/6/{{ ansible_architecture }}/"
 vbox_redhat_url: http://download.virtualbox.org/virtualbox/4.2.16/VirtualBox-4.2-4.2.16_86992_el6-1.x86_64.rpm
+vbox_debian_repo: http://download.virtualbox.org/virtualbox/debian
+vbox_debian_key: http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc
+#vagrant_url_prefix: http://files.vagrantup.com/packages/64e360814c3ad960d810456add977fd4c7d47ce6/vagrant_x86_64.rpm
+vagrant_url_prefix: http://files.vagrantup.com/packages/7ec0ee1d00a916f80b109a298bab08e391945243
+vagrant_debian_url: "{{ vagrant_url_prefix }}/vagrant_1.2.7_x86_64.deb"
+vagrant_redhat_url: "{{ vagrant_url_prefix }}/vagrant_1.2.7_x86_64.rpm"
+vagrant_debian_loc: /var/lib/ansible/vagrant.deb
+vagrant_redhat_loc: /var/lib/ansible/vagrant.rpm

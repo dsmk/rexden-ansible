@@ -1,43 +1,8 @@
 ---
-  - name: Echo the path
-    shell: echo $PATH 1>&2
-
-  - name: Add the virtualbox and vagrant packages (Ubuntu)
-    when: ansible_os_family == 'Debian'
-    apt: name="$item" state=present
-    with_items:
-      - virtualbox
-
-  - name: Determine whether vagrant has been installed (Ubuntu)
-    when: ansible_os_family == 'Debian'
-    shell: dpkg --status vagrant 
-    register: vagrant_found
-    ignore_errors: true
-
-  - name: Download vagrant package (Ubuntu)
-    when: ansible_os_family == 'Debian'
-    when: vagrant_found.rc > 0
-    get_url: dest=/var/tmp/virtualbox.deb url="{{ vagrant_debian_url }}"
-
-  - name: Add the vagrant package on the main web site (Ubuntu)
-    when: vagrant_found.rc > 0
-    when: ansible_os_family == 'Debian'
-    shell: dpkg -i /var/tmp/virtualbox.deb
-
-  #- name: Remove vagrant package prior to doing the gem package (Ubuntu)
-  #  when: ansible_os_family == 'Debian'
-  #  apt: name="vagrant" state=absent
-
-  #- name: Install Vagrant GEM package
-  #  gem: name="vagrant" state="present"
-
-# RedHat setup 
-  - name: Install the VirtualBox RPM if not already installed (RedHat)
+  - include: el.yml
     when: ansible_os_family == 'RedHat'
-    shell: rpm -q VirtualBox || rpm -Uvh {{ vbox_redhat_url }}
 
+  - include: debian.yml
+    when: ansible_os_family == 'Debian'
 
-  - name: Install the Vagrant RPM (RedHat)
-    when: ansible_os_family == 'RedHat'
-    shell: rpm -q vagrant || rpm -Uvh {{ vagrant_redhat_url }}
-
+  - include: vbox.yml

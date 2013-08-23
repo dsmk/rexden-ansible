@@ -1,0 +1,9 @@
+---
+  - name: Install the VirtualBox RPM if not already installed (RedHat)
+    when: ansible_os_family == 'RedHat'
+    shell: rpm -q VirtualBox || rpm -Uvh {{ vbox_redhat_url }}
+
+  - name: Install the Vagrant RPM (RedHat)
+    when: ansible_os_family == 'RedHat'
+    shell: rpm -q vagrant || rpm -Uvh {{ vagrant_redhat_url }}
+

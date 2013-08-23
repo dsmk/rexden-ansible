@@ -1,0 +1,9 @@
+---
+  - name: Download Oracle VirtualBox extensions 
+    register: oracle_vbox
+    get_url: dest="{{ vbox_extpack_loc }}" url="{{ vbox_extpack_url }}"
+
+  - name: Install the Oracle VirtualBox extensions
+    when: oracle_vbox.changed
+    shell: /usr/bin/VBoxManage extpack install "{{ vbox_extpack_loc }}"
+

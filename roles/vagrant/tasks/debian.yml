@@ -1,0 +1,21 @@
+---
+  - name: add the python-apt package so apt_repository will work (Debian/Ubuntu)
+    apt: name="python-apt" state=present 
+
+  - name: Add VirtualBox signing key (Debian/Ubuntu)
+    apt_key: url="{{ vbox_debian_key }}" state=present
+
+  - name: Add the virtualbox repo (Debian/Ubuntu)
+    apt_repository: repo="deb {{ vbox_debian_repo }} {{ ansible_lsb.codename }} contrib" state=present
+
+  - name: Add the virtualbox packages (Debian/Ubuntu)
+    apt: name="$item" state=present update_cache=yes
+    with_items:
+      - "virtualbox-{{ vbox_rel }}"
+
+  - name: Download vagrant package (Debian/Ubuntu)
+    get_url: dest="{{ vagrant_debian_loc }}" url="{{ vagrant_debian_url }}"
+
+  - name: Add the vagrant package on the main web site (Debian/Ubuntu)
+    shell: dpkg --status vagrant || dpkg -i "{{ vagrant_debian_loc }}"
+
